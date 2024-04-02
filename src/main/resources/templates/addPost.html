@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Posts</title>
+</head>
+<body>
+<div>
+  <form th:object="${post}" method="post" th:action="@{/posts}">
+    <input type="text" th:field="${post.title}" placeholder="Title">
+    <textarea th:field="${post.body}" placeholder="Body"></textarea>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+</body>
+</html>
