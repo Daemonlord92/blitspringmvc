@@ -1,10 +1,19 @@
 package com.blitmatthew.springmvc.entity;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 
 public class Post {
     private Integer id;
+    @NotNull
+    @Size(min = 5, max = 75, message = "Title must be minimum 5 characters to 75 maximum!")
     private String title;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Must be letters only!")
+    @Size(min = 10, max = 256, message = "Body has to be between 10 and 256 characters to post!")
     private String body;
     private PostStatus status;
     private LocalDateTime createdOn;

@@ -26,4 +26,17 @@ public class PostService {
         post.setCreatedOn(LocalDateTime.now());
         postRepository.addPost(post);
     }
+
+    public boolean postExistsWithTitle(String title) {
+        return postRepository.getPosts().stream().anyMatch(post -> post.getTitle().equalsIgnoreCase(title));
+    }
+
+    public Post getPostById(Integer id) {
+        return postRepository.getPosts().stream().filter(post -> post.getId().equals(id)).findFirst().orElseThrow();
+    }
+
+    public void updatePost(Post post) {
+        post.setStatus(PostStatus.DRAFT);
+        postRepository.update(post);
+    }
 }

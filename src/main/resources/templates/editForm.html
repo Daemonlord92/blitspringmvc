@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Post - Edit Form</title>
+</head>
+<body>
+    <h1>Edit Post</h1>
+    <p th:text="${post.id}"></p>
+    <form th:action="@{'/posts/edit/' + ${id}}" method="post" th:object="${post}">
+        <input type="hidden" th:field="*{id}">
+        <input type="text" id="title" name="title" th:value="*{title}">
+
+        <textarea id="body" name="body" th:text="*{body}"></textarea>
+
+        <input type="submit" value="Save Post">
+    </form>
+</body>
+</html>

@@ -21,6 +21,9 @@
                 <li>
                     <h4 th:text="${post.getStatus()}"></h4>
                 </li>
+                <li>
+                    <a th:href="@{'/posts/edit/' + ${post.id}}">Edit</a>
+                </li>
             </ul>
         </div>
     </div>

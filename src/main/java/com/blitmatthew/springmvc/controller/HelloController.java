@@ -3,12 +3,13 @@ package com.blitmatthew.springmvc.controller;
 import com.blitmatthew.springmvc.entity.Post;
 import com.blitmatthew.springmvc.entity.PostStatus;
 import com.blitmatthew.springmvc.service.PostService;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -16,7 +17,7 @@ import java.util.Arrays;
 @Controller
 @RequestMapping("/posts")
 public class HelloController {
-
+    private final Logger logger = LoggerFactory.getLogger(HelloController.class);
     private final PostService postService;
 
     public HelloController(PostService postService) {
@@ -36,8 +37,29 @@ public class HelloController {
     }
 
     @PostMapping
-    public String addPost(@ModelAttribute("post") Post post) {
+    public String addPost(@ModelAttribute("post") @Valid Post post, Errors errors) {
+        if(errors.hasErrors()) {
+            return "addPost";
+        }
         postService.createPost(post);
+        return "redirect:/posts/";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editPostForm(@PathVariable Integer id, Model model) {
+        Post post = postService.getPostById(id);
+        logger.info(post.toString());
+        model.addAttribute("post", post);
+        return "editForm";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editPost(@PathVariable Integer id, @ModelAttribute("post") @Valid Post post, Errors errors) {
+        if (errors.hasErrors()) {
+            return "editForm";
+        }
+
+        postService.updatePost(post);
         return "redirect:/posts/";
     }
 }

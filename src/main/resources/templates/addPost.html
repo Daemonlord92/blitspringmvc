@@ -8,7 +8,9 @@
 <div>
   <form th:object="${post}" method="post" th:action="@{/posts}">
     <input type="text" th:field="${post.title}" placeholder="Title">
+      <div style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
     <textarea th:field="${post.body}" placeholder="Body"></textarea>
+      <div style="color: red" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></div>
     <input type="submit" value="Submit">
   </form>
 </div>
