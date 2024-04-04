@@ -56,4 +56,13 @@ public class PostRepository {
             }
         }
     }
+
+    public void deletePost(Integer id) {
+        for (int i = 0; i < postList.size(); i++) {
+            if(postList.get(i).getId().equals(id)){
+                postList.remove(i);
+                return;
+            }
+        }
+    }
 }

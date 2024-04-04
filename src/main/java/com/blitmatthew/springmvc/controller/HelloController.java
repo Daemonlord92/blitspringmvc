@@ -62,4 +62,16 @@ public class HelloController {
         postService.updatePost(post);
         return "redirect:/posts/";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable Integer id) {
+        postService.deletePost(id);
+        return "redirect:/posts/";
+    }
+
+    @GetMapping("/publish/{id}")
+    public String publishPost(@PathVariable Integer id) {
+        postService.publishPost(id);
+        return "redirect:/posts/";
+    }
 }

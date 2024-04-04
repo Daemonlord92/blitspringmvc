@@ -36,7 +36,19 @@ public class PostService {
     }
 
     public void updatePost(Post post) {
-        post.setStatus(PostStatus.DRAFT);
+        if(post.getStatus().toString().isEmpty()){
+            post.setStatus(PostStatus.DRAFT);
+        }
         postRepository.update(post);
+    }
+
+    public void deletePost(Integer id) {
+        postRepository.deletePost(id);
+    }
+
+    public void publishPost(Integer id) {
+        Post post = getPostById(id);
+        post.setStatus(PostStatus.PUBLISHED);
+        updatePost(post);
     }
 }

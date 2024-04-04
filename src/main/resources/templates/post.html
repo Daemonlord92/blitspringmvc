@@ -24,6 +24,12 @@
                 <li>
                     <a th:href="@{'/posts/edit/' + ${post.id}}">Edit</a>
                 </li>
+                <li>
+                    <a th:href="@{'/posts/delete/' + ${post.id}}">Delete</a>
+                </li>
+                <li>
+                    <a th:href="@{'/posts/publish/' +${post.id}}">Publish</a>
+                </li>
             </ul>
         </div>
     </div>
